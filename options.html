@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="utf-8">
+  <title>LenC settings</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="hero">
+    <img src="icons/icon128.png" alt="" width="56" height="56">
+    <div>
+      <h1>LenC settings</h1>
+      <p>Changes save automatically.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Search engines</h2>
+      <p class="help">Choose which engines appear in the popup and the right-click menu.</p>
+
+      <div class="row">
+        <div class="meta"><label for="defaultEngine">Default engine</label><span>Used by the right-click menu and keyboard shortcuts. Picking an engine in the popup changes this too.</span></div>
+        <select id="defaultEngine"></select>
+      </div>
+
+      <div class="engine-list" id="engineList"></div>
+
+      <details class="custom" id="customBox">
+        <summary>Add your own engine</summary>
+        <p class="help">Works with image addresses only. Use <code>{url}</code> where the image address should go.</p>
+        <div class="fields">
+          <label>Name<input id="customName" type="text" placeholder="My engine" maxlength="24"></label>
+          <label>Address template<input id="customTemplate" type="text" placeholder="https://example.com/search?image={url}" spellcheck="false"></label>
+          <label class="check"><input id="customEnabled" type="checkbox"> Enable this engine</label>
+        </div>
+        <p class="note" id="customNote"></p>
+      </details>
+    </section>
+
+    <section class="panel">
+      <h2>Right-click menu</h2>
+      <div class="row">
+        <div class="meta"><label for="imageMethod">How to send the image</label><span>"Image address" is fastest. "Upload the image" also works for images that block outside sites, and for blob or data images.</span></div>
+        <select id="imageMethod" data-key="imageMethod">
+          <option value="url">Image address</option>
+          <option value="upload">Upload the image</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="meta"><label for="contextSubmenu">Show "Search image on…" submenu</label><span>Lists every enabled engine, plus an option for all of them at once.</span></div>
+        <label class="switch"><input id="contextSubmenu" type="checkbox" data-key="contextSubmenu"><i></i></label>
+      </div>
+      <div class="row">
+        <div class="meta"><label for="contextAreaItem">Show "Select area to search"</label><span>Adds a menu item when you right-click the page background.</span></div>
+        <label class="switch"><input id="contextAreaItem" type="checkbox" data-key="contextAreaItem"><i></i></label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Results</h2>
+      <div class="row">
+        <div class="meta"><label for="openInBackground">Open results in the background</label><span>Stay on the current page while the result tab loads.</span></div>
+        <label class="switch"><input id="openInBackground" type="checkbox" data-key="openInBackground"><i></i></label>
+      </div>
+      <div class="row">
+        <div class="meta"><label for="openNextToTab">Open results next to the current tab</label><span>Turn off to put results at the end of the tab bar.</span></div>
+        <label class="switch"><input id="openNextToTab" type="checkbox" data-key="openNextToTab"><i></i></label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Screenshots</h2>
+      <p class="help">Applies to area, visible page and full page searches.</p>
+      <div class="row">
+        <div class="meta"><label>File format</label><span>JPEG is smaller and uploads faster. PNG keeps text sharper.</span></div>
+        <div class="seg" data-key="format" role="group" aria-label="File format">
+          <button type="button" data-value="jpeg">JPEG</button><button type="button" data-value="png">PNG</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="meta"><label for="quality">JPEG quality</label><span>Higher is sharper but larger.</span></div>
+        <div class="range"><input id="quality" type="range" min="0.5" max="1" step="0.01"><output id="qualityOut"></output></div>
+      </div>
+      <div class="row">
+        <div class="meta"><label for="maxDimension">Largest side, area and visible captures</label><span>Bigger images are scaled down to this size before uploading.</span></div>
+        <select id="maxDimension" data-key="maxDimension" data-type="number">
+          <option value="2048">2048 px</option><option value="3072">3072 px</option><option value="4096">4096 px</option><option value="6000">6000 px</option><option value="0">Original size</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="meta"><label for="fullPageMaxHeight">Full page height limit</label><span>Very long pages are captured only down to this height.</span></div>
+        <select id="fullPageMaxHeight" data-key="fullPageMaxHeight" data-type="number">
+          <option value="4000">4,000 px</option><option value="8000">8,000 px</option><option value="12000">12,000 px</option><option value="16000">16,000 px</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Appearance</h2>
+      <div class="row">
+        <div class="meta"><label>Theme</label><span>System follows your computer's light or dark setting.</span></div>
+        <div class="seg" data-key="theme" role="group" aria-label="Theme">
+          <button type="button" data-value="system">System</button><button type="button" data-value="light">Light</button><button type="button" data-value="dark">Dark</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="meta"><label>Accent colour</label><span>Used for buttons, chips and the area selector.</span></div>
+        <div class="swatches" id="swatches"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Keyboard shortcuts</h2>
+      <ul class="keys" id="keys"></ul>
+      <button class="btn" id="editKeys" type="button">Change shortcuts</button>
+    </section>
+
+    <section class="panel">
+      <h2>Privacy</h2>
+      <p class="help flat">LenC has no servers and collects nothing. An image leaves your browser only when you start a search, and it goes straight to the engine you picked. It needs access to all sites so it can read the page you capture and download images for upload.</p>
+      <button class="btn danger" id="reset" type="button">Reset all settings</button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

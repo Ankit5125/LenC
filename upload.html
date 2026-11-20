@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="utf-8">
+  <title>Sending image…</title>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    body{display:grid;place-items:center;min-height:100vh;margin:0;background:var(--bg);color:var(--text)}
+    .card{text-align:center;padding:36px 44px;background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);max-width:360px}
+    .spin{width:34px;height:34px;margin:0 auto 18px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--accent);animation:s .8s linear infinite}
+    @keyframes s{to{transform:rotate(360deg)}}
+    h1{font-size:17px;margin:0 0 6px}
+    p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+    button{margin-top:18px;padding:9px 16px;border:0;border-radius:10px;background:var(--accent);color:var(--on-accent);font:600 14px system-ui,sans-serif;cursor:pointer}
+    .err .spin{display:none}
+    @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+  </style>
+</head>
+<body>
+  <main class="card" id="card">
+    <div class="spin"></div>
+    <h1 id="title">Sending your image…</h1>
+    <p id="msg">This tab will switch to the results in a moment.</p>
+  </main>
+  <script type="module" src="upload.js"></script>
+</body>
+</html>

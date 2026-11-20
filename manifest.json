@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "LenC: Reverse Image Search",
+  "short_name": "LenC",
+  "version": "1.0.0",
+  "description": "Reverse-search any image, a selected area or a whole page on Google Lens, Bing, Yandex or TinEye in one click.",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "LenC",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["contextMenus", "storage", "scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "commands": {
+    "select-area": {
+      "suggested_key": { "default": "Alt+Shift+A" },
+      "description": "Select an area of the page and search it"
+    },
+    "search-visible": {
+      "suggested_key": { "default": "Alt+Shift+V" },
+      "description": "Search the visible part of the page"
+    },
+    "search-fullpage": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Search the full page (scroll and capture)"
+    }
+  }
+}
